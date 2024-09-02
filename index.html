@@ -39,22 +39,7 @@ x
 <br />
 
     	<button style="width: 200px; height: 50px;background-color: yellow;font-size: 16px;" onclick="leerEnVozAlta()">Presionar para Leer en Voz Alta</button>
-        <script>
-	function "leerEnVozAlta()" {
-            // Seleccionar todos los elementos que queremos leer
-            var elementos = document.querySelectorAll('h1, h2, p');
-            var textoCompleto = '';
-
-            // Recorrer los elementos y concatenar su texto
-            elementos.forEach(function(elemento) {
-                textoCompleto += elemento.innerText + ' ';
-            });
-
-            // Crear una instancia de SpeechSynthesisUtterance con el texto completo
-            var mensaje = new SpeechSynthesisUtterance(textoCompleto);
-            window.speechSynthesis.speak(mensaje);
-        }
-    </script>
+    
 <div class="content">
 <h2>&iquest;EXISTE OTRA IGLESIA CATOLICA?: CATOLICISMO ENTRE EL SIGLO IV Y EL SIGLO X ..<br />
 &iquest;de qu&eacute; estamos hablando?<br />
@@ -83,5 +68,32 @@ Siglo X<br />
 959-976: El emperador Basilio II comenz&oacute; la expansi&oacute;n del cristianismo ortodoxo en los territorios eslavos.<br />
 988: El bautismo de Vlad&iacute;mir el Grande, pr&iacute;ncipe de Kiev, que marc&oacute; la cristianizaci&oacute;n de la Rus de Kiev y la expansi&oacute;n del cristianismo ortodoxo en Europa del Este. Durante este per&iacute;odo, la Iglesia Ortodoxa desarroll&oacute; su estructura teol&oacute;gica y administrativa, consolidando su influencia en el Imperio Bizantino y m&aacute;s all&aacute;. Las tensiones entre Roma y Constantinopla tambi&eacute;n comenzaron a intensificarse, preparando el escenario para el Gran Cisma de 1054.<br> <b>LA REFORMA PROTESTANTE COMO SUCESO,  ES UN TEMA EUROPEO</b>. La estructura ORTODOXA era más liberal que la romana salvo el obispado "monárquico".</p>
 </div>
+	<script>
+     function leerEnVozAlta() {
+    // Obtener el texto del elemento con la clase "contenido-texto"
+    var texto = document.querySelector('.content').innerText;
+
+    // Dividir el texto en segmentos mÃ¡s pequeÃ±os
+    var partes = dividirTextoEnPartes(texto, 500); // Por ejemplo, 200 caracteres por parte
+
+    // Leer cada parte secuencialmente
+    partes.forEach((parte) => {
+        var mensaje = new SpeechSynthesisUtterance(parte);
+        mensaje.lang = 'es-ES';
+        mensaje.pitch = .9;
+        mensaje.rate = 1;
+        window.speechSynthesis.speak(mensaje);
+    });
+}
+
+function dividirTextoEnPartes(texto, tamano) {
+    var partes = [];
+    for (var i = 0; i < texto.length; i += tamano) {
+        partes.push(texto.slice(i, i + tamano));
+    }
+    return partes;
+}
+
+    </script> 
 </body>
 </html>
